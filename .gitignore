@@ -1,0 +1,11 @@
+.DS_Store
+bob/bob
+bob/out.ninja
+build/
+obj/obj
+obj/*.obj
+obj/*.mtl
+obj/*.73
+res/
+*.xcodeproj
+game

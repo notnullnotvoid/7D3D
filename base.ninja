@@ -1,0 +1,27 @@
+ninja_required_version = 1.3
+
+builddir = build
+
+#partion option sets
+common = -std=c++11 -stdlib=libc++ -I. -Ilib
+libflags = $common -Ofast
+cppflags = $common -Wall -Wno-unused-const-variable -Ofast
+linkflags = -g -lc++ -framework OpenGL -lSDL2
+
+rule obj
+    command = obj/obj -i $in -o $out
+    description = Processing asset file %in
+
+rule lib
+    command = clang -MMD -MF $out.d $libflags -c $in -o $out
+    description = Building library file $in
+    depfile = $out.d
+
+rule cc
+    command = clang -MMD -MF $out.d $cppflags -c $in -o $out
+    description = Building source file $in
+    depfile = $out.d
+
+rule link
+    command = clang $linkflags $in -o $out
+    description = Linking executable $out
